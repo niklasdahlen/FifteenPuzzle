@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 public class PuzzleBoard extends JPanel {
     private final int SIZE = 4;
@@ -28,6 +30,30 @@ public class PuzzleBoard extends JPanel {
                 b.addActionListener(e->moveTile(b));
                 buttons[r][c] = b;
                 add(b);
+            }
+        }
+    }
+
+    public void shuffle() {
+        List<String> values = new ArrayList<>();
+        for (int i = 1; i < SIZE * SIZE; i++) {
+            values.add(String.valueOf(i));
+        }
+        values.add("");
+
+        do{
+            Collections.shuffle(values);
+        } while(!isSolveable(values));
+
+        int index = 0;
+        for (int r = 0; r < SIZE; r++) {
+            for (int c = 0; c < SIZE; c++) {
+                buttons[r][c].setText(values.get(index));
+                if (values.get(index).equals("")) {
+                    emptyRow = r;
+                    emptyCol = c;
+                }
+                index++;
             }
         }
     }
