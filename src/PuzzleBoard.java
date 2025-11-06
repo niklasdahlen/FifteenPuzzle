@@ -58,4 +58,28 @@ public class PuzzleBoard extends JPanel {
         }
     }
 
+    private void moveTile(JButton b) {
+        int row = -1, col = -1;
+        for(int r = 0; r < SIZE; r++) {
+            for (int c = 0; c < SIZE; c++) {
+                if(buttons[r][c] == b) {
+                    row = r;
+                    col = c;
+                }
+            }
+        }
+
+        if ((Math.abs(row-emptyRow) == 1 && col == emptyCol) ||
+            (Math.abs(col -emptyCol) == 1 && row == emptyRow)) {
+            buttons[emptyRow][emptyCol].setText(b.getText());
+            b.setText("");
+            emptyRow = row;
+            emptyCol = col;
+
+            if(isSolved()) {
+                JOptionPane.showMessageDialog(this,"You won!");
+            }
+        }
+    }
+
 }
