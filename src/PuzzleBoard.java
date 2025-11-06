@@ -81,5 +81,18 @@ public class PuzzleBoard extends JPanel {
             }
         }
     }
+    private boolean isSolved() {
+        int num = 1;
+        for (int r = 0; r < SIZE; r++) {
+            for (int c = 0; c < SIZE; c++) {
+                String text = buttons[r][c].getText();
+                if (r == SIZE -1 && c == SIZE -1)
+                    return text.equals("");
+                if (!text.equals(String.valueOf(num++)))
+                    return false;
+            }
+        }
+        return true;
+    }
 
 }
