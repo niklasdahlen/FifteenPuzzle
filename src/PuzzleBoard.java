@@ -117,5 +117,19 @@ public class PuzzleBoard extends JPanel {
             }
         }
     }
-
+    public void solveInstantly() {
+        int num = 1;
+        for (int r = 0; r < SIZE; r++) {
+            for (int c = 0; c < SIZE; c++) {
+                if (r == SIZE - 1 && c == SIZE -1) {
+                    buttons[r][c].setText("");
+                    emptyRow = r;
+                    emptyCol = c;
+                } else {
+                    buttons[r][c].setText(String.valueOf(num++));
+                }
+            }
+        }
+        JOptionPane.showMessageDialog(this, "You won!");
+    }
 }
