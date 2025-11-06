@@ -95,4 +95,27 @@ public class PuzzleBoard extends JPanel {
         return true;
     }
 
+    private boolean isSolveable(List<String> tiles) {
+        int invers = 0;
+        List<Integer> nums = new ArrayList<>();
+        for (String s : tiles) {
+            if (!s.equals("")) nums.add(Integer.parseInt(s));
+        }
+        for (int i = 0; i < nums.size(); i++) {
+            for (int k  = i + 1; k <nums.size(); k++) {
+                if (nums.get(i) > nums.get(k)) invers++;
+            }
+        }
+        int blankFromBotton = SIZE - (tiles.indexOf("") / SIZE);
+        if (SIZE % 2 == 1) {
+            return invers % 2 == 0;
+        } else {
+            if (blankFromBotton % 2 == 0) {
+                return invers % 2 == 1;
+            } else {
+                return invers % 2 == 0;
+            }
+        }
+    }
+
 }
